@@ -91,6 +91,6 @@ public class ParkingLotTest {
         int capacity = parkingLot.getCapacity();
 
         //then
-        assertEquals(9, capacity);
+        assertEquals(10, capacity);
     }
 }
