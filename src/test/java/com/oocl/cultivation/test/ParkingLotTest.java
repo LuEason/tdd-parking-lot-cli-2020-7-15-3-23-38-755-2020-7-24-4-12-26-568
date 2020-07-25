@@ -5,12 +5,14 @@ import com.oocl.cultivation.CarTicket;
 import com.oocl.cultivation.ParkingLot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
     private ParkingLot parkingLot;
+
     @BeforeEach
     public void setup() {
         parkingLot = new ParkingLot();
