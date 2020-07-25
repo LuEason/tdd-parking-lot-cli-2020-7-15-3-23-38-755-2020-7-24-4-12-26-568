@@ -7,10 +7,17 @@ import com.oocl.cultivation.ParkingLot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyTest {
     private ParkingBoy parkingBoy;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    private String systemOut() {
+        return outContent.toString();
+    }
 
     @BeforeEach
     public void setup() {
@@ -135,5 +142,20 @@ class ParkingBoyTest {
 
         //then
         assertNull(carTicket);
+    }
+
+    @Test
+    void should_fetch_null_and_print_Unrecognized_parking_ticket_when_fetch_given_wrong_ticket() {
+        //given
+        Car car = new Car();
+        parkingBoy.park(car);
+        CarTicket wrongCarTicket = new CarTicket();
+
+        //when
+        Car fetchedCar = parkingBoy.fetch(wrongCarTicket);
+
+        //then
+        assertNull(fetchedCar);
+        assertEquals("Unrecognized parking ticket.", systemOut());
     }
 }
