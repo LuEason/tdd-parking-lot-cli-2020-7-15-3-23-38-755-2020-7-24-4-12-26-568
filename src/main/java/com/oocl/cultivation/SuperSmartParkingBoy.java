@@ -8,14 +8,15 @@ public class SuperSmartParkingBoy extends ParkingBoy {
     }
 
     public CarTicket park(Car car) {
-        int mostEmptyPositionsLotIndex = 0;
-        int mostEmptyPositions = parkingLots.get(0).countEmptyPosition();
+        int largestAvailablePositionRateLotIndex = 0;
+        double largestAvailablePositionRate = (double) parkingLots.get(0).countEmptyPosition() / parkingLots.get(0).getCapacity();
         for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.countEmptyPosition() > mostEmptyPositions) {
-                mostEmptyPositionsLotIndex = parkingLots.indexOf(parkingLot);
-                mostEmptyPositions = parkingLot.countEmptyPosition();
+            double availablePositionRate = (double) parkingLot.countEmptyPosition() / parkingLot.getCapacity();
+            if (availablePositionRate > largestAvailablePositionRate) {
+                largestAvailablePositionRateLotIndex = parkingLots.indexOf(parkingLot);
+                largestAvailablePositionRate = availablePositionRate;
             }
         }
-        return parkingLots.get(mostEmptyPositionsLotIndex).parking(car);
+        return parkingLots.get(largestAvailablePositionRateLotIndex).parking(car);
     }
 }
