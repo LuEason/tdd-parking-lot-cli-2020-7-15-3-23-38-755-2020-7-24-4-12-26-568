@@ -12,6 +12,8 @@ public class CarTicketValidator implements Validator {
             resultMap.put(Boolean.FALSE, "Please provide your parking ticket.");
         } else if (!parkingRoom.containsKey(carTicket)) {
             resultMap.put(Boolean.FALSE, "Unrecognized parking ticket.");
+        } else {
+            resultMap.put(Boolean.TRUE, "");
         }
         return resultMap;
     }
