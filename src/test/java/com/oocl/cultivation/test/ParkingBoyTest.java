@@ -186,4 +186,20 @@ class ParkingBoyTest {
         assertNull(fetchedCar);
         assertEquals("Please provide your parking ticket.", systemOut());
     }
+
+    @Test
+    void should_return_null_and_print_Not_enough_position_when_park_is_full_given_car() {
+        //given
+        Car car = new Car();
+        parkingBoy = new ParkingBoy(new ParkingLot(1));
+        parkingBoy.park(car);
+        Car anOtherCar = new Car();
+
+        //when
+        CarTicket carTicket = parkingBoy.park(anOtherCar);
+
+        //then
+        assertNull(carTicket);
+        assertEquals("Not enough position.", systemOut());
+    }
 }
