@@ -97,4 +97,16 @@ class ParkingBoyTest {
         //then
         assertNull(fetchedCar);
     }
+
+    @Test
+    void should_return_car_ticket_when_park_is_empty_given_car() {
+        //given
+        Car car = new Car();
+
+        //when
+        CarTicket carTicket = parkingBoy.park(car);
+
+        //then
+        assertNotNull(carTicket);
+    }
 }
