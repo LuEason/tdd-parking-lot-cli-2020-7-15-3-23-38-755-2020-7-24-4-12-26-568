@@ -10,6 +10,11 @@ public class ParkingBoy {
     }
 
     public CarTicket park(Car car) {
+        for (ParkingLot parkingLot : parkingLots) {
+            if (parkingLot.havePosition().containsKey(Boolean.TRUE)) {
+                return parkingLot.parking(car);
+            }
+        }
         return parkingLots.get(0).parking(car);
     }
 
