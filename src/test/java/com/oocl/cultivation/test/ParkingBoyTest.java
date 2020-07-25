@@ -164,7 +164,7 @@ class ParkingBoyTest {
 
         //then
         assertNull(fetchedCar);
-        assertEquals("Unrecognized parking ticket.", systemOut());
+        assertTrue(systemOut().endsWith("Unrecognized parking ticket."));
     }
 
     @Test
@@ -179,7 +179,7 @@ class ParkingBoyTest {
 
         //then
         assertNull(fetchedCar);
-        assertEquals("Unrecognized parking ticket.", systemOut());
+        assertTrue(systemOut().endsWith("Unrecognized parking ticket."));
     }
 
     @Test
@@ -193,7 +193,7 @@ class ParkingBoyTest {
 
         //then
         assertNull(fetchedCar);
-        assertEquals("Please provide your parking ticket.", systemOut());
+        assertTrue(systemOut().endsWith("Please provide your parking ticket."));
     }
 
     @Test
@@ -211,7 +211,7 @@ class ParkingBoyTest {
 
         //then
         assertNull(carTicket);
-        assertEquals("Not enough position.", systemOut());
+        assertTrue(systemOut().endsWith("Not enough position."));
     }
 
     @Test
