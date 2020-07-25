@@ -49,6 +49,6 @@ public class ParkingLot {
     }
 
     public int getCapacity() {
-        return 0;
+        return capacity;
     }
 }
