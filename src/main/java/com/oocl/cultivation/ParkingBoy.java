@@ -8,10 +8,10 @@ public class ParkingBoy {
     }
 
     public CarTicket park(Car car) {
-        return new CarTicket();
+        return parkingLot.parking(car);
     }
 
     public Car fetch(CarTicket carTicket) {
-        return new Car();
+        return parkingLot.fetchTheCar(carTicket);
     }
 }
