@@ -7,16 +7,14 @@ import com.oocl.cultivation.ParkingLot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyTest {
     private ParkingBoy parkingBoy;
-    private ParkingLot parkingLot;
 
     @BeforeEach
     public void setup() {
-        parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot();
         parkingBoy = new ParkingBoy(parkingLot);
     }
 
@@ -56,5 +54,19 @@ class ParkingBoyTest {
 
         //then
         assertEquals(car, fetchedCar);
+    }
+
+    @Test
+    void should_fetch_null_when_fetch_given_wrong_car_ticket() {
+        //given
+        Car car = new Car();
+        CarTicket rightCarTicket = parkingBoy.park(car);
+        CarTicket wrongCarTicket = new CarTicket();
+
+        //when
+        Car fetchedCar = parkingBoy.fetch(wrongCarTicket);
+
+        //then
+        assertNull(fetchedCar);
     }
 }
