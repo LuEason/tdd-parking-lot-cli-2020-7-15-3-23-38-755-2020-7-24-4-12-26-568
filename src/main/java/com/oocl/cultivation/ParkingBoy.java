@@ -19,6 +19,12 @@ public class ParkingBoy {
     }
 
     public Car fetch(CarTicket carTicket) {
+        for (ParkingLot parkingLot : parkingLots) {
+            Car car = parkingLot.fetchTheCar(carTicket);
+            if (car != null) {
+                return car;
+            }
+        }
         return parkingLots.get(0).fetchTheCar(carTicket);
     }
 }
