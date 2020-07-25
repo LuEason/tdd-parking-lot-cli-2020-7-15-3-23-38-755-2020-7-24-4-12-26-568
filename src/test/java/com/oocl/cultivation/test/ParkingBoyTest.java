@@ -159,6 +159,21 @@ class ParkingBoyTest {
     }
 
     @Test
+    void should_fetch_null_and_print_Unrecognized_parking_ticket_when_fetch_given_used_ticket() {
+        //given
+        Car car = new Car();
+        CarTicket carTicket = parkingBoy.park(car);
+        parkingBoy.fetch(carTicket);
+
+        //when
+        Car fetchedCar = parkingBoy.fetch(carTicket);
+
+        //then
+        assertNull(fetchedCar);
+        assertEquals("Unrecognized parking ticket.", systemOut());
+    }
+
+    @Test
     void should_fetch_null_and_print_Please_provide_your_parking_ticket_when_fetch_given_null() {
         //given
         Car car = new Car();
