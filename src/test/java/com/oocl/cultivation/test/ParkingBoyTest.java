@@ -217,12 +217,11 @@ class ParkingBoyTest {
     @Test
     void should_park_the_car_in_the_second_parking_lot_and_return_car_ticket_when_the_first_park_is_full_given_car() {
         //given
-        Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(1));
         parkingLots.add(new ParkingLot());
         parkingBoy = new ParkingBoy(parkingLots);
-        parkingBoy.park(car);
+        parkingBoy.park(new Car());
         Car anOtherCar = new Car();
 
         //when
@@ -230,5 +229,25 @@ class ParkingBoyTest {
 
         //then
         assertNotNull(carTicket);
+    }
+
+    @Test
+    void should_fetch_car_in_the_correspond_parking_lot_when_the_first_park_is_full_given_car_ticket() {
+        //given
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1));
+        parkingLots.add(new ParkingLot(1));
+        parkingLots.add(new ParkingLot());
+        parkingBoy = new ParkingBoy(parkingLots);
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+        Car anOtherCar = new Car();
+        CarTicket carTicket = parkingBoy.park(anOtherCar);
+
+        //when
+        Car fetchedCar = parkingBoy.fetch(carTicket);
+
+        //then
+        assertEquals(anOtherCar, fetchedCar);
     }
 }
