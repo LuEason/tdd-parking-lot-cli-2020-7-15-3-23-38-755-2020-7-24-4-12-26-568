@@ -6,11 +6,14 @@ import com.oocl.cultivation.ParkingLot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
     private ParkingLot parkingLot;
-
     @BeforeEach
     public void setup() {
         parkingLot = new ParkingLot();
@@ -39,5 +42,30 @@ public class ParkingLotTest {
 
         //then
         assertNotNull(fetchedCar);
+    }
+
+    @Test
+    void should_return_map_contain_TRUE_when_havePosition_and_parkingRoom_is_empty() {
+        //given
+
+        //when
+        Map<Boolean, String> havePosition = parkingLot.havePosition();
+
+        //then
+        assertTrue(havePosition.containsKey(Boolean.TRUE));
+    }
+
+    @Test
+    void should_return_map_contain_FALSE_and_print_Not_enough_position_when_havePosition_and_parkingRoom_is_full() {
+        //given
+        parkingLot = new ParkingLot(1);
+        parkingLot.parking(new Car());
+
+        //when
+        Map<Boolean, String> havePosition = parkingLot.havePosition();
+
+        //then
+        assertTrue(havePosition.containsKey(Boolean.FALSE));
+        assertEquals("Not enough position.", havePosition.get(Boolean.FALSE));
     }
 }
