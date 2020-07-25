@@ -27,8 +27,8 @@ public class ParkingLot {
     }
 
     public Car fetchTheCar(CarTicket carTicket) {
-        if (!validator.validate(carTicket, parkingRoom)) {
-            System.out.print("Unrecognized parking ticket.");
+        if (validator.validate(carTicket, parkingRoom).containsKey(Boolean.FALSE)) {
+            System.out.print(validator.validate(carTicket, parkingRoom).get(Boolean.FALSE));
         }
         return  parkingRoom.remove(carTicket);
     }
