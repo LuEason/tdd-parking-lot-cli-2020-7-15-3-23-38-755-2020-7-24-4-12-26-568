@@ -35,13 +35,14 @@ class ParkingBoyTest {
     @Test
     void should_fetch_car_when_fetch_given_car_ticket() {
         //given
-        CarTicket carTicket = new CarTicket();
+        Car car = new Car();
+        CarTicket carTicket = parkingBoy.park(car);
 
         //when
-        Car car = parkingBoy.fetch(carTicket);
+        Car fetchedCar = parkingBoy.fetch(carTicket);
 
         //then
-        assertNotNull(car);
+        assertNotNull(fetchedCar);
     }
 
     @Test
