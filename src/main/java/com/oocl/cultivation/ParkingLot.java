@@ -43,4 +43,8 @@ public class ParkingLot {
         }
         return  parkingRoom.remove(carTicket);
     }
+
+    public int countEmptyPosition() {
+        return 0;
+    }
 }

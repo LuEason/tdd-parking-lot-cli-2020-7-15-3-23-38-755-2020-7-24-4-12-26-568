@@ -68,4 +68,18 @@ public class ParkingLotTest {
         assertTrue(havePosition.containsKey(Boolean.FALSE));
         assertEquals("Not enough position.", havePosition.get(Boolean.FALSE));
     }
+
+
+    @Test
+    void should_return_empty_position_count_when_countEmptyPosition() {
+        //given
+        parkingLot = new ParkingLot();
+        parkingLot.parking(new Car());
+
+        //when
+        int emptyPositionCount = parkingLot.countEmptyPosition();
+
+        //then
+        assertEquals(9, emptyPositionCount);
+    }
 }
