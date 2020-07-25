@@ -16,9 +16,13 @@ public class ParkingLot {
     }
 
     public CarTicket parking(Car car) {
-        CarTicket carTicket = new CarTicket();
-        parkingRoom.put(carTicket, car);
-        return carTicket;
+        if (parkingRoom.size() < capacity) {
+            CarTicket carTicket = new CarTicket();
+            parkingRoom.put(carTicket, car);
+            return carTicket;
+        } else {
+            return null;
+        }
     }
 
     public Car fetchTheCar(CarTicket carTicket) {
