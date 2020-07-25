@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ParkingLot {
     private final Map<CarTicket, Car> parkingRoom = new HashMap<>();
-    private int capacity;
+    private final int capacity;
 
     public ParkingLot() {
         this(10);

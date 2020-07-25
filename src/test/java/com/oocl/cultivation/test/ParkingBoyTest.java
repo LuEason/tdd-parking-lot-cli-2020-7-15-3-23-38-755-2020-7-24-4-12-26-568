@@ -60,7 +60,7 @@ class ParkingBoyTest {
     void should_fetch_null_when_fetch_given_wrong_car_ticket() {
         //given
         Car car = new Car();
-        CarTicket rightCarTicket = parkingBoy.park(car);
+        parkingBoy.park(car);
         CarTicket wrongCarTicket = new CarTicket();
 
         //when
@@ -74,7 +74,7 @@ class ParkingBoyTest {
     void should_fetch_null_when_fetch_given_null() {
         //given
         Car car = new Car();
-        CarTicket rightCarTicket = parkingBoy.park(car);
+        parkingBoy.park(car);
 
         //when
         Car fetchedCar = parkingBoy.fetch(null);
@@ -89,10 +89,9 @@ class ParkingBoyTest {
         Car car = new Car();
         CarTicket carTicket = parkingBoy.park(car);
         parkingBoy.fetch(carTicket);
-        CarTicket usedCarTicket = carTicket;
 
         //when
-        Car fetchedCar = parkingBoy.fetch(usedCarTicket);
+        Car fetchedCar = parkingBoy.fetch(carTicket);
 
         //then
         assertNull(fetchedCar);

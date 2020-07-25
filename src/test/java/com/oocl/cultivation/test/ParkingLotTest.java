@@ -2,7 +2,6 @@ package com.oocl.cultivation.test;
 
 import com.oocl.cultivation.Car;
 import com.oocl.cultivation.CarTicket;
-import com.oocl.cultivation.ParkingBoy;
 import com.oocl.cultivation.ParkingLot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
