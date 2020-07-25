@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,8 +21,11 @@ class ParkingBoyTest {
 
     @BeforeEach
     public void setup() {
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy = new ParkingBoy(parkingLot);
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        parkingLots.add(new ParkingLot());
+        parkingLots.add(new ParkingLot());
+        parkingBoy = new ParkingBoy(parkingLots);
         System.setOut(new PrintStream(outContent));
     }
 
@@ -119,7 +124,9 @@ class ParkingBoyTest {
     void should_return_car_ticket_when_capacity_is_1_and_park_is_empty_given_car() {
         //given
         Car car = new Car();
-        parkingBoy = new ParkingBoy(new ParkingLot(1));
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1));
+        parkingBoy = new ParkingBoy(parkingLots);
 
         //when
         CarTicket carTicket = parkingBoy.park(car);
@@ -132,7 +139,9 @@ class ParkingBoyTest {
     void should_return_null_when_capacity_is_1_and_park_is_full_given_car() {
         //given
         Car car = new Car();
-        parkingBoy = new ParkingBoy(new ParkingLot(1));
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1));
+        parkingBoy = new ParkingBoy(parkingLots);
         parkingBoy.park(car);
         Car anOtherCar = new Car();
 
@@ -191,7 +200,9 @@ class ParkingBoyTest {
     void should_return_null_and_print_Not_enough_position_when_park_is_full_given_car() {
         //given
         Car car = new Car();
-        parkingBoy = new ParkingBoy(new ParkingLot(1));
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1));
+        parkingBoy = new ParkingBoy(parkingLots);
         parkingBoy.park(car);
         Car anOtherCar = new Car();
 
@@ -201,5 +212,23 @@ class ParkingBoyTest {
         //then
         assertNull(carTicket);
         assertEquals("Not enough position.", systemOut());
+    }
+
+    @Test
+    void should_park_the_car_in_the_second_parking_lot_and_return_car_ticket_when_the_first_park_is_full_given_car() {
+        //given
+        Car car = new Car();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1));
+        parkingLots.add(new ParkingLot());
+        parkingBoy = new ParkingBoy(parkingLots);
+        parkingBoy.park(car);
+        Car anOtherCar = new Car();
+
+        //when
+        CarTicket carTicket = parkingBoy.park(anOtherCar);
+
+        //then
+        assertNotNull(carTicket);
     }
 }
