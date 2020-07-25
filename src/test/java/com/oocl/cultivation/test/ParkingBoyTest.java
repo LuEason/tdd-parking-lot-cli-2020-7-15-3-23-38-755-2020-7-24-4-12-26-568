@@ -1,13 +1,11 @@
 package com.oocl.cultivation.test;
 
-import com.oocl.cultivation.Car;
-import com.oocl.cultivation.CarTicket;
-import com.oocl.cultivation.ParkingBoy;
-import com.oocl.cultivation.ParkingLot;
+import com.oocl.cultivation.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,6 +21,7 @@ class ParkingBoyTest {
     public void setup() {
         ParkingLot parkingLot = new ParkingLot();
         parkingBoy = new ParkingBoy(parkingLot);
+        System.setOut(new PrintStream(outContent));
     }
 
     @Test

@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class ParkingLot {
     private final Map<CarTicket, Car> parkingRoom = new HashMap<>();
+    private final Validator validator = new CarTicketValidator();
     private final int capacity;
 
     public ParkingLot() {
@@ -26,6 +27,9 @@ public class ParkingLot {
     }
 
     public Car fetchTheCar(CarTicket carTicket) {
+        if (!validator.validate(carTicket, parkingRoom)) {
+            System.out.print("Unrecognized parking ticket.");
+        }
         return  parkingRoom.remove(carTicket);
     }
 }
