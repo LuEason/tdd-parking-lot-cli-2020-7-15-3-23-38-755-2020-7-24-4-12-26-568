@@ -79,4 +79,18 @@ public class ParkingLotTest {
         //then
         assertEquals(9, emptyPositionCount);
     }
+
+
+    @Test
+    void should_return_capacity_when_getCapacity() {
+        //given
+        parkingLot = new ParkingLot();
+        parkingLot.parking(new Car());
+
+        //when
+        int capacity = parkingLot.getCapacity();
+
+        //then
+        assertEquals(9, capacity);
+    }
 }

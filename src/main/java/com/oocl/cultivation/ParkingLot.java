@@ -47,4 +47,8 @@ public class ParkingLot {
     public int countEmptyPosition() {
         return capacity - parkingRoom.size();
     }
+
+    public int getCapacity() {
+        return 0;
+    }
 }
