@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SmartParkingBoyTest {
+class SmartParkingBoyTest {
 
     @Test
     void should_park_the_car_in_the_second_parking_lot_and_return_car_ticket_when_the_second_park_have_larger_position_given_car() {
