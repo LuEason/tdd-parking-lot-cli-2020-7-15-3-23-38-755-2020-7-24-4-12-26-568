@@ -17,7 +17,7 @@ class ParkingBoyTest {
     private ParkingBoy parkingBoy;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
         parkingLots.add(new ParkingLot());
@@ -69,12 +69,16 @@ class ParkingBoyTest {
         Car car = new Car();
         parkingBoy.park(car);
         CarTicket wrongCarTicket = new CarTicket();
+        AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        Car fetchedCar = parkingBoy.fetch(wrongCarTicket);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            fetchedCar.set(parkingBoy.fetch(wrongCarTicket));
+        });
 
         //then
-        assertNull(fetchedCar);
+        assertEquals("Unrecognized parking ticket.", exception.getMessage());
+        assertNull(fetchedCar.get());
     }
 
     @Test
@@ -82,12 +86,16 @@ class ParkingBoyTest {
         //given
         Car car = new Car();
         parkingBoy.park(car);
+        AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        Car fetchedCar = parkingBoy.fetch(null);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            fetchedCar.set(parkingBoy.fetch(null));
+        });
 
         //then
-        assertNull(fetchedCar);
+        assertEquals("Please provide your parking ticket.", exception.getMessage());
+        assertNull(fetchedCar.get());
     }
 
     @Test
@@ -96,12 +104,16 @@ class ParkingBoyTest {
         Car car = new Car();
         CarTicket carTicket = parkingBoy.park(car);
         parkingBoy.fetch(carTicket);
+        AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        Car fetchedCar = parkingBoy.fetch(carTicket);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            fetchedCar.set(parkingBoy.fetch(carTicket));
+        });
 
         //then
-        assertNull(fetchedCar);
+        assertEquals("Unrecognized parking ticket.", exception.getMessage());
+        assertNull(fetchedCar.get());
     }
 
     @Test
