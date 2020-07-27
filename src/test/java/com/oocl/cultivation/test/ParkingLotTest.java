@@ -6,16 +6,13 @@ import com.oocl.cultivation.ParkingLot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ParkingLotTest {
+class ParkingLotTest {
     private ParkingLot parkingLot;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         parkingLot = new ParkingLot();
     }
 
@@ -56,7 +53,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_map_contain_FALSE_and_print_Not_enough_position_when_havePosition_and_parkingRoom_is_full() {
+    void should_return_map_contain_FALSE_and_throw_exception_when_havePosition_and_parkingRoom_is_full() {
         //given
         parkingLot = new ParkingLot(1);
         parkingLot.parking(new Car());
