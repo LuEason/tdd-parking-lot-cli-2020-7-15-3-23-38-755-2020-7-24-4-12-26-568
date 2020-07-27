@@ -9,18 +9,18 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class CarTicketValidatorTest {
+class CarTicketValidatorTest {
     private CarTicketValidator carTicketValidator;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         carTicketValidator = new CarTicketValidator();
     }
 
     @Test
-    void should_return_Map_With_Unrecognized_parking_ticket_when_validate_given_no_ticket() {
+    void should_throw_exception_when_validate_given_no_ticket() {
         //given
         Car car = new Car();
         CarTicket carTicket = new CarTicket();
@@ -28,14 +28,14 @@ public class CarTicketValidatorTest {
         parkingRoom.put(carTicket, car);
 
         //when
-        Map<Boolean, String> result = carTicketValidator.validate(null, parkingRoom);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> carTicketValidator.validate(null, parkingRoom));
 
         //then
-        assertEquals("Please provide your parking ticket.", result.get(Boolean.FALSE));
+        assertEquals("Please provide your parking ticket.", exception.getMessage());
     }
 
     @Test
-    void should_return_Map_With_Unrecognized_parking_ticket_when_validate_given_wrong_ticket() {
+    void should_throw_exception_when_validate_given_wrong_ticket() {
         //given
         Car car = new Car();
         CarTicket carTicket = new CarTicket();
@@ -44,14 +44,14 @@ public class CarTicketValidatorTest {
         CarTicket wrongCarTicket = new CarTicket();
 
         //when
-        Map<Boolean, String> result = carTicketValidator.validate(wrongCarTicket, parkingRoom);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> carTicketValidator.validate(wrongCarTicket, parkingRoom));
 
         //then
-        assertEquals("Unrecognized parking ticket.", result.get(Boolean.FALSE));
+        assertEquals("Unrecognized parking ticket.", exception.getMessage());
     }
 
     @Test
-    void should_return_Map_With_TRUE_when_validate_given_right_ticket() {
+    void should_return__TRUE_when_validate_given_right_ticket() {
         //given
         Car car = new Car();
         CarTicket carTicket = new CarTicket();
@@ -59,9 +59,9 @@ public class CarTicketValidatorTest {
         parkingRoom.put(carTicket, car);
 
         //when
-        Map<Boolean, String> result = carTicketValidator.validate(carTicket, parkingRoom);
+        boolean validate = carTicketValidator.validate(carTicket, parkingRoom);
 
         //then
-        assertEquals("", result.get(Boolean.TRUE));
+        assertTrue(validate);
     }
 }
