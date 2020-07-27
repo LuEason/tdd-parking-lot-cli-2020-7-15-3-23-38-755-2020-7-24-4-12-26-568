@@ -39,10 +39,10 @@ public class ParkingLot {
     }
 
     public Car fetchTheCar(CarTicket carTicket) {
-        if (validator.validate(carTicket, parkingRoom).containsKey(Boolean.FALSE)) {
-            System.out.print(validator.validate(carTicket, parkingRoom).get(Boolean.FALSE));
+        if (validator.validate(carTicket, parkingRoom)) {
+            return parkingRoom.remove(carTicket);
         }
-        return parkingRoom.remove(carTicket);
+        return null;
     }
 
     public int countEmptyPosition() {
