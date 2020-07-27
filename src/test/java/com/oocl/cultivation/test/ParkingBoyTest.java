@@ -7,20 +7,14 @@ import com.oocl.cultivation.ParkingLot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private ParkingBoy parkingBoy;
-
-    private String systemOut() {
-        return outContent.toString();
-    }
 
     @BeforeEach
     public void setup() {
@@ -29,7 +23,6 @@ class ParkingBoyTest {
         parkingLots.add(new ParkingLot());
         parkingLots.add(new ParkingLot());
         parkingBoy = new ParkingBoy(parkingLots);
-        System.setOut(new PrintStream(outContent));
     }
 
     @Test
@@ -161,13 +154,16 @@ class ParkingBoyTest {
         Car car = new Car();
         parkingBoy.park(car);
         CarTicket wrongCarTicket = new CarTicket();
+        AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        Car fetchedCar = parkingBoy.fetch(wrongCarTicket);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            fetchedCar.set(parkingBoy.fetch(wrongCarTicket));
+        });
 
         //then
-        assertNull(fetchedCar);
-        assertTrue(systemOut().endsWith("Unrecognized parking ticket."));
+        assertEquals("Unrecognized parking ticket.", exception.getMessage());
+        assertNull(fetchedCar.get());
     }
 
     @Test
@@ -176,13 +172,16 @@ class ParkingBoyTest {
         Car car = new Car();
         CarTicket carTicket = parkingBoy.park(car);
         parkingBoy.fetch(carTicket);
+        AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        Car fetchedCar = parkingBoy.fetch(carTicket);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            fetchedCar.set(parkingBoy.fetch(carTicket));
+        });
 
         //then
-        assertNull(fetchedCar);
-        assertTrue(systemOut().endsWith("Unrecognized parking ticket."));
+        assertEquals("Unrecognized parking ticket.", exception.getMessage());
+        assertNull(fetchedCar.get());
     }
 
     @Test
@@ -190,13 +189,16 @@ class ParkingBoyTest {
         //given
         Car car = new Car();
         parkingBoy.park(car);
+        AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        Car fetchedCar = parkingBoy.fetch(null);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            fetchedCar.set(parkingBoy.fetch(null));
+        });
 
         //then
-        assertNull(fetchedCar);
-        assertTrue(systemOut().endsWith("Please provide your parking ticket."));
+        assertEquals("Please provide your parking ticket.", exception.getMessage());
+        assertNull(fetchedCar.get());
     }
 
     @Test
@@ -208,13 +210,16 @@ class ParkingBoyTest {
         parkingBoy = new ParkingBoy(parkingLots);
         parkingBoy.park(car);
         Car anOtherCar = new Car();
+        AtomicReference<CarTicket> carTicket = new AtomicReference<>();
 
         //when
-        CarTicket carTicket = parkingBoy.park(anOtherCar);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            carTicket.set(parkingBoy.park(anOtherCar));
+        });
 
         //then
-        assertNull(carTicket);
-        assertTrue(systemOut().endsWith("Not enough position."));
+        assertEquals("Not enough position.", exception.getMessage());
+        assertNull(carTicket.get());
     }
 
     @Test
