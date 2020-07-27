@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,10 +49,10 @@ public class ParkingLotTest {
         //given
 
         //when
-        Map<Boolean, String> havePosition = parkingLot.havePosition();
+        boolean havePosition = parkingLot.havePosition();
 
         //then
-        assertTrue(havePosition.containsKey(Boolean.TRUE));
+        assertTrue(havePosition);
     }
 
     @Test
@@ -61,11 +62,12 @@ public class ParkingLotTest {
         parkingLot.parking(new Car());
 
         //when
-        Map<Boolean, String> havePosition = parkingLot.havePosition();
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            parkingLot.havePosition();
+        });
 
         //then
-        assertTrue(havePosition.containsKey(Boolean.FALSE));
-        assertEquals("Not enough position.", havePosition.get(Boolean.FALSE));
+        assertEquals("Not enough position.", exception.getMessage());
     }
 
 

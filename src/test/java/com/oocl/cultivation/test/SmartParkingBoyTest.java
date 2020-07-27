@@ -27,6 +27,6 @@ public class SmartParkingBoyTest {
 
         //then
         assertNotNull(carTicket);
-        assertTrue(firstParkingLot.havePosition().containsKey(Boolean.TRUE));
+        assertTrue(firstParkingLot.havePosition());
     }
 }

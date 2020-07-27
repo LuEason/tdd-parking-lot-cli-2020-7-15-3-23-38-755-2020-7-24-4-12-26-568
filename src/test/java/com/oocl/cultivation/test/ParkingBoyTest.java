@@ -152,12 +152,16 @@ class ParkingBoyTest {
         parkingBoy = new ParkingBoy(parkingLots);
         parkingBoy.park(car);
         Car anOtherCar = new Car();
+        AtomicReference<CarTicket> carTicket = new AtomicReference<>();
 
         //when
-        CarTicket carTicket = parkingBoy.park(anOtherCar);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            carTicket.set(parkingBoy.park(anOtherCar));
+        });
 
         //then
-        assertNull(carTicket);
+        assertEquals("Not enough position.", exception.getMessage());
+        assertNull(carTicket.get());
     }
 
     @Test
