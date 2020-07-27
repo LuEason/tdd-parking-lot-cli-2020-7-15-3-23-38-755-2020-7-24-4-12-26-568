@@ -72,9 +72,7 @@ class ParkingBoyTest {
         AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            fetchedCar.set(parkingBoy.fetch(wrongCarTicket));
-        });
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> fetchedCar.set(parkingBoy.fetch(wrongCarTicket)));
 
         //then
         assertEquals("Unrecognized parking ticket.", exception.getMessage());
@@ -89,9 +87,7 @@ class ParkingBoyTest {
         AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            fetchedCar.set(parkingBoy.fetch(null));
-        });
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> fetchedCar.set(parkingBoy.fetch(null)));
 
         //then
         assertEquals("Please provide your parking ticket.", exception.getMessage());
@@ -107,9 +103,7 @@ class ParkingBoyTest {
         AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            fetchedCar.set(parkingBoy.fetch(carTicket));
-        });
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> fetchedCar.set(parkingBoy.fetch(carTicket)));
 
         //then
         assertEquals("Unrecognized parking ticket.", exception.getMessage());
@@ -155,9 +149,7 @@ class ParkingBoyTest {
         AtomicReference<CarTicket> carTicket = new AtomicReference<>();
 
         //when
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            carTicket.set(parkingBoy.park(anOtherCar));
-        });
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> carTicket.set(parkingBoy.park(anOtherCar)));
 
         //then
         assertEquals("Not enough position.", exception.getMessage());
@@ -173,9 +165,7 @@ class ParkingBoyTest {
         AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            fetchedCar.set(parkingBoy.fetch(wrongCarTicket));
-        });
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> fetchedCar.set(parkingBoy.fetch(wrongCarTicket)));
 
         //then
         assertEquals("Unrecognized parking ticket.", exception.getMessage());
@@ -191,9 +181,7 @@ class ParkingBoyTest {
         AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            fetchedCar.set(parkingBoy.fetch(carTicket));
-        });
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> fetchedCar.set(parkingBoy.fetch(carTicket)));
 
         //then
         assertEquals("Unrecognized parking ticket.", exception.getMessage());
@@ -208,9 +196,7 @@ class ParkingBoyTest {
         AtomicReference<Car> fetchedCar = new AtomicReference<>();
 
         //when
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            fetchedCar.set(parkingBoy.fetch(null));
-        });
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> fetchedCar.set(parkingBoy.fetch(null)));
 
         //then
         assertEquals("Please provide your parking ticket.", exception.getMessage());
@@ -229,9 +215,7 @@ class ParkingBoyTest {
         AtomicReference<CarTicket> carTicket = new AtomicReference<>();
 
         //when
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            carTicket.set(parkingBoy.park(anOtherCar));
-        });
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> carTicket.set(parkingBoy.park(anOtherCar)));
 
         //then
         assertEquals("Not enough position.", exception.getMessage());

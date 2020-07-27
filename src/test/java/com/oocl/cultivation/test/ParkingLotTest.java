@@ -62,9 +62,7 @@ public class ParkingLotTest {
         parkingLot.parking(new Car());
 
         //when
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            parkingLot.havePosition();
-        });
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> parkingLot.havePosition());
 
         //then
         assertEquals("Not enough position.", exception.getMessage());
