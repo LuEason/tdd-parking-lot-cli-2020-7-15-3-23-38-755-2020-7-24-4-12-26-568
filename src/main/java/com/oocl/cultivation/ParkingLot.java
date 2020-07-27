@@ -29,6 +29,7 @@ public class ParkingLot {
 
     public Map<Boolean, String> havePosition() {
         Map<Boolean, String> resultMap = new HashMap<>();
+        //todo
         if (parkingRoom.size() < capacity) {
             resultMap.put(Boolean.TRUE, "");
         } else {
