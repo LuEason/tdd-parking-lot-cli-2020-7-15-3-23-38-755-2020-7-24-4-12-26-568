@@ -7,6 +7,7 @@ public class SuperSmartParkingBoy extends ParkingBoy {
         super(parkingLots);
     }
 
+    @Override
     public CarTicket park(Car car) {
         int largestAvailablePositionRateLotIndex = 0;
         double largestAvailablePositionRate = (double) parkingLots.get(0).countEmptyPosition() / parkingLots.get(0).getCapacity();

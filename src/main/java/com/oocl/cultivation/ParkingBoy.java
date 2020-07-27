@@ -11,18 +11,27 @@ public class ParkingBoy {
 
     public CarTicket park(Car car) {
         for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.havePosition().containsKey(Boolean.TRUE)) {
-                return parkingLot.parking(car);
+            try {
+                if (parkingLot.havePosition()) {
+                    return parkingLot.parking(car);
+                }
+            } catch (Exception e) {
+                continue;
             }
+
         }
         return parkingLots.get(0).parking(car);
     }
 
     public Car fetch(CarTicket carTicket) {
         for (ParkingLot parkingLot : parkingLots) {
-            Car car = parkingLot.fetchTheCar(carTicket);
-            if (car != null) {
-                return car;
+            try {
+                Car car = parkingLot.fetchTheCar(carTicket);
+                if (car != null) {
+                    return car;
+                }
+            } catch (Exception e) {
+                continue;
             }
         }
         return parkingLots.get(0).fetchTheCar(carTicket);

@@ -17,25 +17,20 @@ public class ParkingLot {
     }
 
     public CarTicket parking(Car car) {
-        if (havePosition().containsKey(Boolean.TRUE)) {
+        if (havePosition()) {
             CarTicket carTicket = new CarTicket();
             parkingRoom.put(carTicket, car);
             return carTicket;
-        } else {
-            System.out.print(havePosition().get(Boolean.FALSE));
-            return null;
         }
+        return null;
     }
 
-    public Map<Boolean, String> havePosition() {
-        Map<Boolean, String> resultMap = new HashMap<>();
-        //todo
+    public boolean havePosition() {
         if (parkingRoom.size() < capacity) {
-            resultMap.put(Boolean.TRUE, "");
+            return true;
         } else {
-            resultMap.put(Boolean.FALSE, "Not enough position.");
+            throw new RuntimeException("Not enough position.");
         }
-        return resultMap;
     }
 
     public Car fetchTheCar(CarTicket carTicket) {

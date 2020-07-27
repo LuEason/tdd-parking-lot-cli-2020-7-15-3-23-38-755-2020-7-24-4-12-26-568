@@ -7,6 +7,7 @@ public class SmartParkingBoy extends ParkingBoy {
         super(parkingLots);
     }
 
+    @Override
     public CarTicket park(Car car) {
         int mostEmptyPositionsLotIndex = 0;
         int mostEmptyPositions = parkingLots.get(0).countEmptyPosition();
