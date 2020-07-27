@@ -64,7 +64,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_fetch_null_when_fetch_given_wrong_car_ticket() {
+    void should_fetch_null_and_throw_exception_when_fetch_given_wrong_car_ticket() {
         //given
         Car car = new Car();
         parkingBoy.park(car);
@@ -80,7 +80,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_fetch_null_when_fetch_given_null() {
+    void should_fetch_null_and_throw_exception_when_fetch_given_null() {
         //given
         Car car = new Car();
         parkingBoy.park(car);
@@ -95,7 +95,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_fetch_null_when_fetch_given_used_car_ticket() {
+    void should_fetch_null_and_throw_exception_when_fetch_given_used_car_ticket() {
         //given
         Car car = new Car();
         CarTicket carTicket = parkingBoy.park(car);
@@ -138,7 +138,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_null_when_capacity_is_1_and_park_is_full_given_car() {
+    void should_return_null_and_throw_exception_when_capacity_is_1_and_park_is_full_given_car() {
         //given
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
@@ -157,7 +157,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_fetch_null_and_print_Unrecognized_parking_ticket_when_fetch_given_wrong_ticket() {
+    void should_fetch_null_and_throw_exception_ticket_when_fetch_given_wrong_ticket() {
         //given
         Car car = new Car();
         parkingBoy.park(car);
@@ -173,7 +173,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_fetch_null_and_print_Unrecognized_parking_ticket_when_fetch_given_used_ticket() {
+    void should_fetch_null_and_throw_exception_when_fetch_given_used_ticket() {
         //given
         Car car = new Car();
         CarTicket carTicket = parkingBoy.park(car);
@@ -189,22 +189,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_fetch_null_and_print_Please_provide_your_parking_ticket_when_fetch_given_null() {
-        //given
-        Car car = new Car();
-        parkingBoy.park(car);
-        AtomicReference<Car> fetchedCar = new AtomicReference<>();
-
-        //when
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> fetchedCar.set(parkingBoy.fetch(null)));
-
-        //then
-        assertEquals("Please provide your parking ticket.", exception.getMessage());
-        assertNull(fetchedCar.get());
-    }
-
-    @Test
-    void should_return_null_and_print_Not_enough_position_when_park_is_full_given_car() {
+    void should_return_null_and_throw_exception_when_park_is_full_given_car() {
         //given
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
